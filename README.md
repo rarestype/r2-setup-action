@@ -14,7 +14,7 @@ configure thr `aws` cli to use cloudflare r2
     uses: your-org/r2-setup-action@v1
     with:
         cloudflare-account-id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-        r2-access-key-id: ${{ vars.R2_ACCESS_KEY }}
+        r2-access-key-id: ${{ secrets.R2_ACCESS_KEY }}
         r2-access-key: ${{ secrets.R2_ACCESS_SECRET }}
 ```
 

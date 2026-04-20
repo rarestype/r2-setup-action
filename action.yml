@@ -1,0 +1,31 @@
+name: "Setup Cloudflare R2"
+description: "Configure AWS CLI to use Cloudflare R2"
+branding:
+    icon: award
+    color: purple
+
+inputs:
+    r2-access-key-id:
+        required: true
+    r2-access-key:
+        required: true
+    cloudflare-account-id:
+        required: true
+
+runs:
+    using: composite
+    steps:
+        -   name: Configure R2
+            shell: bash
+            run: |
+                R2_URL="https://${{ inputs.cloudflare-account-id }}.r2.cloudflarestorage.com"
+
+                # export standard S3 environment variables
+                echo "AWS_ACCESS_KEY_ID=${{ inputs.r2-access-key-id }}" >> $GITHUB_ENV
+                echo "AWS_SECRET_ACCESS_KEY=${{ inputs.r2-access-key }}" >> $GITHUB_ENV
+                echo "AWS_DEFAULT_REGION=auto" >> $GITHUB_ENV
+                echo "R2_ENDPOINT=${R2_URL}" >> $GITHUB_ENV
+
+                # set R2-optimized chunk sizes
+                aws configure set default.s3.multipart_chunksize 100MB
+                aws configure set default.s3.multipart_threshold 100MB

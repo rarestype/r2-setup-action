@@ -2,7 +2,7 @@
 
 ⛅ &nbsp; **r2-setup-action** &nbsp; ⛅
 
-configure thr `aws` cli to use cloudflare r2
+configure the `aws` cli to use cloudflare r2
 
 
 </div>
